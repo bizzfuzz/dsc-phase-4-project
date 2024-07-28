@@ -36,7 +36,7 @@ def predict(tweet: str):
         # for now, we'll just return the input tweet
         return {"result": analyze_sentiment(tweet).tolist()[0]}
     except Exception as e:
-        raise HTTPException(status_code=500, detail="An error occurred while processing the request")
+        raise HTTPException(status_code=500, detail="Error: " + str(e))
 
 def analyze_sentiment(tweet: str):
     data = preprocess_tweet(tweet)
