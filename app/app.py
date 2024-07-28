@@ -2,12 +2,15 @@ import uvicorn
 import pickle
 import nltk
 import numpy as np
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from nltk.tokenize import TweetTokenizer
 from nltk.corpus import stopwords
 from string import punctuation
 from nltk.stem import WordNetLemmatizer
-from sklearn.feature_extraction.text import TfidfVectorizer
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+
 
 
 # Download necessary nltk resources
@@ -22,11 +25,14 @@ with open('tfidvectorizer.pkl', 'rb') as file:
     vectorizer = pickle.load(file)
 #test tweet
 tweet = "@test Loving the new iphone, it's the best. #iphonelife"
+app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
+
 
 #index route
 @app.get("/")
-def read_root():
-    return True
+async def read_root(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
 
 @app.post("/predict")
