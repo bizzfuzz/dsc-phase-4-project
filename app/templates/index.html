@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tweet Sentiment Analyzer - Group 2</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Tweet Sentiment Analyzer</h1>
+    </header>
+    <main class='auto-size'>
+        <h3>Type or paste your tweet below</h3>
+        <form id="tweet-form">
+            <textarea id="tweet" name="tweet" rows="5" cols="30"></textarea>
+            <br>
+            <button type='submit' id="analyze-button">Analyze Sentiment</button>
+        </form>
+        <br>
+        <div id="result-container">
+            <h3 id="result"></h3>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Group 2 | Phase 4 Project</p>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById('tweet-form').addEventListener('submit', async (event) => {
+                event.preventDefault();
+                const formData = new FormData(event.target);
+                try 
+                {
+                    document.getElementById('result').innerText = 'Analyzing...';
+                    document.getElementById('analyze-button').disabled = true;
+                    document.getElementById('analyze-button').innerText = 'Analyzing...';
+                    const response = await fetch('/predict/', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    result_div = document.getElementById('result')
+                    if (response.ok) 
+                    {
+                        const result = await response.json();
+                        analysis = result.result
+                        if(analysis == 1)
+                        {
+                            result_div.innerText = 'Positive Sentiment';
+                            result_div.style.color = "#198f68"
+                        }
+                        else
+                        {
+                            result_div.innerText = 'Negative Sentiment';
+                            result_div.style.color = "#8f193c"
+                        }
+                    } 
+                    else 
+                    {
+                        result_div.innerText = 'Error processing request.';
+                        result_div.style.color = "#8f193c"
+                    }
+                    document.getElementById('analyze-button').innerText = 'Analyze Sentiment';
+                    document.getElementById('analyze-button').disabled = false;
+
+                } 
+                catch (error) 
+                {
+                    document.getElementById('result').innerText = 'An error occurred.';
+                    result_div.style.color = "#8f193c"
+                    document.getElementById('analyze-button').innerText = 'Analyze Sentiment';
+                    document.getElementById('analyze-button').disabled = false;
+                    
+                }
+            });
+        })
+    </script>
+</body>
+</html>
