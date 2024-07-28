@@ -28,6 +28,7 @@ tweet = "@test Loving the new iphone, it's the best. #iphonelife"
 def read_root():
     return analyze_sentiment(tweet)
 
+
 @app.post("/predict")
 def predict(tweet: str):
     try:
@@ -54,7 +55,7 @@ def preprocess_tweet(tweet:str):
     tokens = tokenize_tweet(tweet)
     tokens = stem_tweet(tokens)
     tokens = lemmatize_tweet(tokens)
-    tweet_vector = vectorizer.fit_transform(tokens)
+    tweet_vector = vectorizer.transform(tokens)
     return tweet_vector
 
 def tokenize_tweet(tweet:str):
