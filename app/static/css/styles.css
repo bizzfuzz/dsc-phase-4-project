@@ -3,6 +3,8 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
+    background-image: url("/static/images/bg.png");
+    background-repeat: repeat;
 }
 
 header {
@@ -15,6 +17,12 @@ header {
 main {
     padding: 4em;
     text-align: center;
+    background: #fff;
+    border-radius: 25px;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 5%;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 main textarea
 {
