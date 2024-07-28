@@ -2,7 +2,7 @@ import uvicorn
 import pickle
 import nltk
 import numpy as np
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, Form, HTTPException, Request
 from nltk.tokenize import TweetTokenizer
 from nltk.corpus import stopwords
 from string import punctuation
@@ -36,10 +36,8 @@ async def read_root(request: Request):
 
 
 @app.post("/predict")
-def predict(tweet: str):
+def predict(tweet: str = Form(...)):
     try:
-        # TODO: implement sentiment analysis using a pre-trained model
-        # for now, we'll just return the input tweet
         return {"result": analyze_sentiment(tweet).tolist()[0]}
     except Exception as e:
         raise HTTPException(status_code=500, detail="Error: " + str(e))

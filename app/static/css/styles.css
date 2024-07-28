@@ -27,9 +27,10 @@ main {
 main textarea
 {
     width: 50%;
-    min-height: 200px;
+    min-height: 15px;
     resize: vertical;
     font-size: large;
+    padding: 30px;
 }
 main h3
 {
@@ -45,7 +46,7 @@ main button
     padding: 1em 2em;
     cursor: pointer;
     font-size: large;
-    width: 50%;
+    width: 55%;
 }
 main button:hover
 {

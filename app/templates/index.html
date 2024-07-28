@@ -12,10 +12,10 @@
     </header>
     <main class='auto-size'>
         <h3>Type or paste your tweet below</h3>
-        <form name="tweet-form">
-            <textarea id="tweet-input" rows="5" cols="30"></textarea>
+        <form id="tweet-form">
+            <textarea id="tweet" name="tweet" rows="5" cols="30"></textarea>
             <br>
-            <button id="analyze-button">Analyze Sentiment</button>
+            <button type='submit' id="analyze-button">Analyze Sentiment</button>
         </form>
         
         <div id="result"></div>
@@ -23,5 +23,43 @@
     <footer>
         <p>&copy; 2024 Group 2 | Phase 4 Project</p>
     </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById('tweet-form').addEventListener('submit', async (event) => {
+                event.preventDefault();
+                const formData = new FormData(event.target);
+                try 
+                {
+                    document.getElementById('result').innerText = 'Analyzing...';
+                    document.getElementById('analyze-button').disabled = true;
+                    document.getElementById('analyze-button').innerText = 'Analyzing...';
+                    const response = await fetch('/predict/', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (response.ok) 
+                    {
+                        const result = await response.json();
+                        document.getElementById('result').innerText = result.result;
+                    } 
+                    else 
+                    {
+                        document.getElementById('result').innerText = 'Error processing request.';
+                    }
+                    document.getElementById('analyze-button').innerText = 'Analyze Sentiment';
+                    document.getElementById('analyze-button').disabled = false;
+
+                } 
+                catch (error) 
+                {
+                    document.getElementById('result').innerText = 'An error occurred.';
+                    document.getElementById('analyze-button').innerText = 'Analyze Sentiment';
+                    document.getElementById('analyze-button').disabled = false;
+                    
+                }
+            });
+        })
+    </script>
 </body>
 </html>
