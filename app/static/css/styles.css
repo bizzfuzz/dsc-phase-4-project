@@ -53,6 +53,19 @@ main button:hover
     background-color: #27E8A7;
     color: #1B1C28;
 }
+div #result-container
+{
+    width: 100%;
+    text-align: center;
+}
+div #result
+{
+    font-size: larger;
+    padding: 30px;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+}
 footer {
     background-color: #1B1C28;
     color: #fff;
