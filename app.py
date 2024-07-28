@@ -26,7 +26,7 @@ tweet = "@test Loving the new iphone, it's the best. #iphonelife"
 #index route
 @app.get("/")
 def read_root():
-    return analyze_sentiment(tweet)
+    return True
 
 
 @app.post("/predict")
@@ -34,7 +34,7 @@ def predict(tweet: str):
     try:
         # TODO: implement sentiment analysis using a pre-trained model
         # for now, we'll just return the input tweet
-        return analyze_sentiment(tweet)
+        return {"result": analyze_sentiment(tweet).tolist()[0]}
     except Exception as e:
         raise HTTPException(status_code=500, detail="An error occurred while processing the request")
 
