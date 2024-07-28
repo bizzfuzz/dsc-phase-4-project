@@ -1,21 +1,27 @@
-<!-- app/templates/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FastAPI App</title>
+    <title>Tweet Sentiment Analyzer - Group 2</title>
     <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
     <header>
-        <h1>Welcome to FastAPI!</h1>
+        <h1>Tweet Sentiment Analyzer</h1>
     </header>
     <main>
-        <p>This is a sample page with CSS styling.</p>
+        <h3>Type or paste your tweet below</h3>
+        <form name="tweet-form">
+            <textarea id="tweet-input" rows="5" cols="30"></textarea>
+            <br>
+            <button id="analyze-button">Analyze Sentiment</button>
+        </form>
+        
+        <div id="result"></div>
     </main>
     <footer>
-        <p>&copy; 2024 FastAPI App</p>
+        <p>&copy; 2024 Group 2 | Phase 4 Project</p>
     </footer>
 </body>
 </html>
